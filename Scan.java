@@ -1,16 +1,16 @@
 import java.util.*;
 import java.io.*;
 
-public class FastReader {
+public class Scan {
 
     BufferedReader br;
     StringTokenizer st;
 
-   public FastReader() {
+   public Scan() {
        br = new BufferedReader(new InputStreamReader(System.in));
    }
 
-   public FastReader(String s) throws FileNotFoundException{
+   public Scan(String s) throws FileNotFoundException{
        br = new BufferedReader(new FileReader(new File(s)));
    }
 
