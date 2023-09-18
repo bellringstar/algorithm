@@ -1,4 +1,4 @@
-package python.linked_list;
+package linked_list;
 
 /**
  * Definition for singly-linked list.

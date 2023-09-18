@@ -36,3 +36,22 @@ for l in range(n - 1):
         v1, v2 = a[l], a[cand]
 
 print(v1, v2)
+
+
+# -----------------------
+l, r = 0, n - 1
+best_sum = 1e10
+v1, v2 = 0, 0
+
+while l < r:
+    sum_value = a[l] + a[r]
+    if abs(sum_value) < best_sum:
+        best_sum = abs(sum_value)
+        v1, v2 = a[l], a[r]
+    if sum_value < 0:
+        l += 1
+    else:
+        r -= 1
+
+
+print(v1, v2)
