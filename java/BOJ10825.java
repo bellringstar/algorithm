@@ -50,7 +50,7 @@ public class BOJ10825 {
 				return s1.english - s2.english; // 오름차순
 			}
 			if (s1.math != s2.math) {
-				return s2.math - s1.math; // 내맃마순
+				return s2.math - s1.math; // 내림차순
 			}
 			return s1.name.compareTo(s2.name);
 		});
