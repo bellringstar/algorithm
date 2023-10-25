@@ -29,7 +29,7 @@ public class BOJ7795 {
         }
     }
 
-    static int lower_bound(int[] A, int L, int R, int X) {
+    static int lower_bound(int[] B, int L, int R, int X) {
         // A[L...R] 에서 X 미만의 수 중 제일 오른쪽 인덱스를 return 하는 함수
         // 그런 게 없다면 L - 1 을 return 한다
 
