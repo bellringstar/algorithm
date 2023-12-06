@@ -3,44 +3,36 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BOJ13702 {
+public class BOJ1300 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
 
-	static int N, K;
-	static int[] volumes;
-
-	// 주전자 용량은 같은데 내용량은 랜덤. N 주전자, K명에게 똑같이 나눠주려고 한다. 분배 후 주전자에 막걸리가 남는다 -> 버린다.
-	// K명에대 최대한의 많은 양의 막걸리 분배 용량
+	static int N;
+	static long k;
 
 	static void input() {
 		N = scan.nextInt();
-		K = scan.nextInt(); // N<= K
-
-		volumes = new int[N + 1];
-		for (int i = 1; i <= N; i++) {
-			volumes[i] = scan.nextInt(); // 주전자 용량
-		}
+		k = scan.nextLong();
 	}
 
-	static boolean isPossible(long cand) {
-		int cnt = 0;
+	static boolean isPossible(long candidate) {
+		long sum = 0;
 		for (int i = 1; i <= N; i++) {
-			cnt += volumes[i] / cand;
+			sum += Math.min(N, candidate / i);
 		}
-		return cnt >= K;
+		return sum >= k;
 	}
 
 	static void pro() {
-		long L = 0, R = Integer.MAX_VALUE, ans = 0;
+		long L = 1, R = (long)N * N, ans = 0;
 		while (L <= R) {
 			long mid = (L + R) / 2;
 			if (isPossible(mid)) {
 				ans = mid;
-				L = mid + 1;
-			} else {
 				R = mid - 1;
+			} else {
+				L = mid + 1;
 			}
 		}
 		System.out.println(ans);
@@ -60,7 +52,7 @@ public class BOJ13702 {
 		}
 
 		String next() {
-			while (st == null || !st.hasMoreTokens()) {
+			while (st == null || !st.hasMoreElements()) {
 				try {
 					st = new StringTokenizer(br.readLine());
 				} catch (IOException e) {
