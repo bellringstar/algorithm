@@ -1,30 +1,120 @@
-import sys
+import copy
+answer = 0
+def solution(coin, cards):
+    start = len(cards)//3
+    my_cards = cards[:start]
+    rec_func(0,start,coin,cards,my_cards)
 
-input = sys.stdin.readline
+    return answer
 
-# 산성 용액 1~ 10억 , 알칼리 용액 -1 ~ -10억
-# 두 용액을 혼합하여 특성값이 0에 가까운 용액
-# [-2, 4, -99, -1, 98] => -99+98 = -1
-# 어떤 용액 A -> A+x = 0 => x = -A => -A에 가까운 용액을 찾는다.
-# 가까운 수 => 정렬했을 때 해당 수와 가장 가까운 수는 그 수 양 옆이다.
-# N = 10^5 => N^2은 시간초과
+def is_sum_equal(target:int, my_cards:list):
+    x = -1
+    y = -1
+    find = False
+    nums = set()
+    for card in my_cards:
+        nums.add(card)
+        if target - card in nums and target != 2*card:
+            find = True
+            x = card
+            y = target - card
+            break
+    if find:
+        my_cards.remove(x)
+        my_cards.remove(y)
+    return my_cards
 
-N = int(input())
-nums = sorted(list(map(int, input().split())))
-
-l, r = 0, N - 1
-best_sum = 1e10
-v1, v2 = 0, 0
-
-while l < r:
-    sum_value = nums[l] + nums[r]
-    if abs(sum_value) < best_sum:
-        best_sum = abs(sum_value)
-        v1, v2 = nums[l], nums[r]
-    if sum_value < 0:
-        l += 1
+def rec_func(cnt, depth, coin, cards, my_cards):
+    global answer
+    if depth == len(cards)//3:
+        new_cards = copy.deepcopy(my_cards)
     else:
-        r -= 1
+        new_cards = is_sum_equal(len(cards) + 1, copy.deepcopy(my_cards))
+        if new_cards == my_cards:
+            answer = max(answer, cnt)
+            return
+    if depth > len(cards):
+        answer = max(answer, cnt)
+        return
+
+    if coin >=2:
+        new_cards.append(cards[depth])
+        new_cards.append(cards[depth+1])
+        rec_func(cnt+1, depth+2, coin - 2,cards, new_cards)
+        new_cards.pop()
+        new_cards.pop()
+
+    if coin >= 1:
+        new_cards.append(cards[depth])
+        rec_func(cnt+1, depth+2, coin - 1,cards, new_cards)
+        new_cards.pop()
+        new_cards.append(cards[depth+1])
+        rec_func(cnt+1, depth+2, coin - 1,cards, new_cards)
+        new_cards.pop()
 
 
-print(v1, v2)
+    rec_func(cnt+1, depth+2, coin,cards, new_cards)
+
+solution(4, [3, 6, 7, 2, 1, 10, 5, 9, 8, 12, 11, 4])
+
+
+
+
+import copy
+answer = 0
+def solution(coin, cards):
+    start = len(cards)//3
+    my_cards = cards[:start]
+    rec_func(0,start,coin,cards,my_cards)
+
+    return answer
+
+def is_sum_equal(target:int, my_cards:list):
+    x = -1
+    y = -1
+    find = False
+    for i in range(len(my_cards) - 1):
+        if find:
+            break
+        for j in range(len(my_cards)):
+            if my_cards[i] + my_cards[j] == target:
+                x = my_cards[i]
+                y = my_cards[j]
+                find = True
+                break
+    if find:
+        my_cards.remove(x)
+        my_cards.remove(y)
+    return my_cards
+
+def rec_func(cnt, depth, coin, cards, my_cards):
+    global answer
+    if depth == len(cards)//3:
+        new_cards = copy.deepcopy(my_cards)
+    else:
+        new_cards = is_sum_equal(len(cards) + 1, copy.deepcopy(my_cards))
+        if new_cards == my_cards:
+            answer = max(answer, cnt)
+            return
+    if depth > len(cards):
+        answer = max(answer, cnt)
+        return
+
+    if coin >=2:
+        new_cards.append(cards[depth])
+        new_cards.append(cards[depth+1])
+        rec_func(cnt+1, depth+2, coin - 2,cards, new_cards)
+        new_cards.pop()
+        new_cards.pop()
+
+    if coin >= 1:
+        new_cards.append(cards[depth])
+        rec_func(cnt+1, depth+2, coin - 1,cards, new_cards)
+        new_cards.pop()
+        new_cards.append(cards[depth+1])
+        rec_func(cnt+1, depth+2, coin - 1,cards, new_cards)
+        new_cards.pop()
+
+
+    rec_func(cnt+1, depth+2, coin,cards, new_cards)
+
