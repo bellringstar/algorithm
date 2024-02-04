@@ -1,32 +1,31 @@
+package boj;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Test {
-
+public class BOJ10816 {
 	static FastReader scan = new FastReader();
-	static StringBuilder sb = new StringBuilder();
-
-	static int N, S;
-	static int[] nums;
+	static int N, M;
+	static int[] A, B;
 
 	static void input() {
 		N = scan.nextInt();
-		S = scan.nextInt();
-		nums = new int[N + 1];
+		A = new int[N + 1];
 		for (int i = 1; i <= N; i++) {
-			nums[i] = scan.nextInt();
+			A[i] = scan.nextInt();
 		}
-	}
-
-	static void pro() {
-		
+		M = scan.nextInt();
+		Arrays.sort(A, 1, N + 1);
 	}
 
 	public static void main(String[] args) {
 		input();
-		pro();
+		for (int i = 1; i <= M; i++) {
+			int target = scan.nextInt();
+		}
 	}
 
 	static class FastReader {
@@ -66,5 +65,4 @@ public class Test {
 			return str;
 		}
 	}
-
 }

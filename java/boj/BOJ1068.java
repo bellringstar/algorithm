@@ -1,27 +1,56 @@
+package boj;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class Test {
+public class BOJ1068 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
-
-	static int N, S;
-	static int[] nums;
+	static int n, root, erased;
+	static ArrayList<Integer>[] child;
+	static int[] leaf;
 
 	static void input() {
-		N = scan.nextInt();
-		S = scan.nextInt();
-		nums = new int[N + 1];
-		for (int i = 1; i <= N; i++) {
-			nums[i] = scan.nextInt();
+		n = scan.nextInt();
+		child = new ArrayList[n];
+		leaf = new int[n];
+		for (int i = 0; i < n; i++)
+			child[i] = new ArrayList<>();
+		for (int i = 0; i < n; i++) {
+			int par = scan.nextInt();
+			if (par == -1) {
+				root = i;
+				continue;
+			}
+			child[par].add(i);
+		}
+		erased = scan.nextInt();
+	}
+
+	static void dfs(int x, int par) {
+		if (child[x].isEmpty()) {
+			leaf[x]++;
+		}
+		for (int y : child[x]) {
+			dfs(y, x);
+			leaf[x] += leaf[y];
 		}
 	}
 
 	static void pro() {
-		
+		for (int i = 0; i < n; i++) {
+			if (child[i].contains(erased)) {
+				child[i].remove(child[i].indexOf(erased));
+			}
+		}
+
+		if (root != erased)
+			dfs(root, -1);
+		System.out.println(leaf[root]);
 	}
 
 	public static void main(String[] args) {
@@ -30,8 +59,8 @@ public class Test {
 	}
 
 	static class FastReader {
-		private BufferedReader br;
-		private StringTokenizer st;
+		BufferedReader br;
+		StringTokenizer st;
 
 		public FastReader() {
 			br = new BufferedReader(new InputStreamReader(System.in));
@@ -52,10 +81,6 @@ public class Test {
 			return Integer.parseInt(next());
 		}
 
-		long nextLong() {
-			return Long.parseLong(next());
-		}
-
 		String nextLine() {
 			String str = "";
 			try {
@@ -66,5 +91,4 @@ public class Test {
 			return str;
 		}
 	}
-
 }

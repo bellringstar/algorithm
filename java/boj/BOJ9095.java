@@ -1,37 +1,38 @@
+package boj;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Test {
+public class BOJ9095 {
 
 	static FastReader scan = new FastReader();
-	static StringBuilder sb = new StringBuilder();
+	static int N;
+	static int[] dp;
 
-	static int N, S;
-	static int[] nums;
-
-	static void input() {
-		N = scan.nextInt();
-		S = scan.nextInt();
-		nums = new int[N + 1];
-		for (int i = 1; i <= N; i++) {
-			nums[i] = scan.nextInt();
+	static void pro() {
+		dp = new int[12];
+		dp[1] = 1;
+		dp[2] = 2;
+		dp[3] = 4;
+		for (int i = 4; i < 11; i++) {
+			dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
 		}
 	}
 
-	static void pro() {
-		
-	}
-
 	public static void main(String[] args) {
-		input();
 		pro();
+		int T = scan.nextInt();
+		for (int i = 0; i < T; i++) {
+			N = scan.nextInt();
+			System.out.println(dp[N]);
+		}
 	}
 
 	static class FastReader {
-		private BufferedReader br;
-		private StringTokenizer st;
+		BufferedReader br;
+		StringTokenizer st;
 
 		public FastReader() {
 			br = new BufferedReader(new InputStreamReader(System.in));
@@ -50,20 +51,6 @@ public class Test {
 
 		int nextInt() {
 			return Integer.parseInt(next());
-		}
-
-		long nextLong() {
-			return Long.parseLong(next());
-		}
-
-		String nextLine() {
-			String str = "";
-			try {
-				str = br.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return str;
 		}
 	}
 

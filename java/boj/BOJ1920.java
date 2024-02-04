@@ -1,37 +1,58 @@
+package boj;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Test {
-
+public class BOJ1920 {
 	static FastReader scan = new FastReader();
-	static StringBuilder sb = new StringBuilder();
-
-	static int N, S;
-	static int[] nums;
+	static int N, M;
+	static int[] A, nums;
 
 	static void input() {
 		N = scan.nextInt();
-		S = scan.nextInt();
-		nums = new int[N + 1];
+		A = new int[N + 1];
 		for (int i = 1; i <= N; i++) {
+			A[i] = scan.nextInt();
+		}
+		Arrays.sort(A, 1, N + 1);
+		M = scan.nextInt();
+		nums = new int[M + 1];
+		for (int i = 1; i <= M; i++) {
 			nums[i] = scan.nextInt();
 		}
 	}
 
-	static void pro() {
-		
+	static void binarySearch(int[] A, int left, int right, int target) {
+		int ans = 0;
+		while (left <= right) {
+			int mid = (left + right) / 2;
+			if (A[mid] == target) {
+				ans = 1;
+				break;
+			}
+			if (A[mid] > target) {
+				right = mid - 1;
+			} else {
+				left = mid + 1;
+			}
+		}
+		System.out.println(ans);
 	}
 
 	public static void main(String[] args) {
 		input();
-		pro();
+		for (int i = 1; i <= M; i++) {
+			int target = nums[i];
+			binarySearch(A, 1, N, target);
+		}
 	}
 
 	static class FastReader {
-		private BufferedReader br;
-		private StringTokenizer st;
+		BufferedReader br;
+		StringTokenizer st;
 
 		public FastReader() {
 			br = new BufferedReader(new InputStreamReader(System.in));
@@ -66,5 +87,5 @@ public class Test {
 			return str;
 		}
 	}
-
 }
+
