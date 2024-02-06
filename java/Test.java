@@ -1,70 +1,36 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class Test {
 
-	static FastReader scan = new FastReader();
-	static StringBuilder sb = new StringBuilder();
-
-	static int N, S;
-	static int[] nums;
-
-	static void input() {
-		N = scan.nextInt();
-		S = scan.nextInt();
-		nums = new int[N + 1];
-		for (int i = 1; i <= N; i++) {
-			nums[i] = scan.nextInt();
-		}
-	}
-
-	static void pro() {
-		
-	}
-
 	public static void main(String[] args) {
-		input();
-		pro();
+		List<String> list = List.of("apple", "banana", "kiwi");
+
+		Optional<String> a = list.stream()
+			.filter(e1 -> {
+				System.out.println("filter() was called");
+				return e1.contains("a");
+			})
+			.map(e1 -> {
+				System.out.println("map() was called");
+				return e1.toUpperCase();
+			}).findAny();
+
+		System.out.println(a.get());
 	}
 
-	static class FastReader {
-		private BufferedReader br;
-		private StringTokenizer st;
+	static Map<Integer, List<Integer>> graph = new HashMap<>();
 
-		public FastReader() {
-			br = new BufferedReader(new InputStreamReader(System.in));
-		}
-
-		String next() {
-			while (st == null || !st.hasMoreElements()) {
-				try {
-					st = new StringTokenizer(br.readLine());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+	public List<Integer> recursiveDfs(int v, List<Integer> discovered) {
+		discovered.add(v);
+		for (Integer w : graph.get(v)) {
+			if (!discovered.contains(w)) {
+				recursiveDfs(w, discovered);
 			}
-			return st.nextToken();
 		}
 
-		int nextInt() {
-			return Integer.parseInt(next());
-		}
-
-		long nextLong() {
-			return Long.parseLong(next());
-		}
-
-		String nextLine() {
-			String str = "";
-			try {
-				str = br.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return str;
-		}
+		return discovered;
 	}
-
 }
