@@ -95,7 +95,7 @@ public class P87377 {
 			return new Point((long)x, (long)y);
 		}
 
-		static class Point {
+		class Point {
 			public final long x;
 			public final long y;
 

@@ -82,7 +82,7 @@ public class LC787review {
 	}
 
 	class Solution2 {
-		static class Vertex {
+		class Vertex {
 			int to;
 			int cost;
 			int cnt;
