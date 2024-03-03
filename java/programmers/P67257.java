@@ -60,13 +60,13 @@ public class P67257 {
 		}
 
 		private long calculate(long lhs, long rhs, String op) {
-			return switch (op) {
-				case "+" -> lhs + rhs;
-				case "-" -> lhs - rhs;
-				case "*" -> lhs * rhs;
-				default -> 0;
-			};
+			// return switch (op) {
+			// 	case "+" -> lhs + rhs;
+			// 	case "-" -> lhs - rhs;
+			// 	case "*" -> lhs * rhs;
+			// 	default -> 0;
+			// };
+			return 1;
 		}
 	}
-
 }

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64cdd6f2-39f9-4bc8-b853-a065fe39ceab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/Solution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/programmers/P42748.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/programmers/P42748.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/programmers/P67257.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/programmers/P67257.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +25,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="2WWdFtGOpK0jpp8aatQbDy0GcHt" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -30,34 +36,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\starr\Desktop\git\algorithm\codingTest\greedy" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="algorithm" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="algorithm" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="313" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,6 +103,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696852171228</updated>
       <workItem from="1698631684573" duration="22000" />
+      <workItem from="1708949233766" duration="68000" />
     </task>
     <servers />
   </component>
