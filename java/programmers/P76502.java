@@ -2,7 +2,6 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class P76502 {
@@ -16,7 +15,8 @@ public class P76502 {
 
 			int cnt = 0;
 
-			if (s.length() == 0) return 0;
+			if (s.length() == 0)
+				return 0;
 
 			for (int i = 0; i < s.length(); i++) {
 				s = rotate(s);
@@ -70,8 +70,10 @@ public class P76502 {
 					case '{' -> stack.push('}');
 					case '[' -> stack.push(']');
 					case ')', '}', ']' -> {
-						if (stack.isEmpty()) return false;
-						if (stack.pollLast() != c) return false;
+						if (stack.isEmpty())
+							return false;
+						if (stack.pollLast() != c)
+							return false;
 					}
 				}
 			}

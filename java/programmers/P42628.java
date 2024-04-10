@@ -16,7 +16,8 @@ public class P42628 {
 			}
 
 			public void removeMax() {
-				if (size == 0) return;
+				if (size == 0)
+					return;
 				maxPq.poll();
 				if (--size == 0) {
 					maxPq.clear();
@@ -25,7 +26,8 @@ public class P42628 {
 			}
 
 			public void removeMin() {
-				if (size == 0) return;
+				if (size == 0)
+					return;
 				minPq.poll();
 				if (--size == 0) {
 					maxPq.clear();
@@ -34,15 +36,18 @@ public class P42628 {
 			}
 
 			public int max() {
-				if (size == 0) return 0;
+				if (size == 0)
+					return 0;
 				return maxPq.peek();
 			}
 
 			public int min() {
-				if (size == 0) return 0;
+				if (size == 0)
+					return 0;
 				return minPq.poll();
 			}
 		}
+
 		public int[] solution(String[] operations) {
 			DoublyPriorityQueue dpq = new DoublyPriorityQueue();
 
@@ -63,7 +68,7 @@ public class P42628 {
 				}
 			}
 
-			return new int[]{dpq.max(), dpq.min()};
+			return new int[] {dpq.max(), dpq.min()};
 		}
 	}
 }
