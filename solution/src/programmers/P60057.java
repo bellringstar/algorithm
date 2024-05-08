@@ -9,12 +9,12 @@ public class P60057 {
 	1,2,3... 단위로 잘라보면서 제일 짧은 길이를 리턴한다.
 
 	 */
-	class Solution {
+	static class Solution {
 		public int solution(String s) {
 
 			int min = Integer.MAX_VALUE;
 
-			for (int length = 1; length < s.length(); length++) {
+			for (int length = 1; length <= s.length(); length++) {
 
 				min = Math.min(min, compress(s, length));
 			}
@@ -61,5 +61,10 @@ public class P60057 {
 
 			return tokens;
 		}
+	}
+
+	public static void main(String[] args) {
+		Solution solution = new Solution();
+		solution.solution("a");
 	}
 }
