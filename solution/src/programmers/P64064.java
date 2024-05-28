@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class P64064 {
 
-	/*
+    /*
     불량사용자 리스트 존재. 응모자(user_id) 중 불량사용자(banned_id) 리스트에 있는 사람 = 제재 아이디
     1. 불량사용자 id 별로 user_id에서 가능성 있는 목록을 뽑는다. -> 정규식
     ex) fr*d* -> fradi, frodo
@@ -21,76 +21,82 @@ public class P64064 {
     2번 리스트에서 하나를 선택 중복이라면? 다른 것을 선택 더 이상 선택할 수 없다 -> 1번으로 돌아가 다음걸 선택
     저장은 Set을 통해 순서가 다른 경우도 같은 것으로 처리
     */
-	class Solution {
+    class Solution {
 
-		static List<String>[] BANNED;
-		static Set<Set<String>> idSet = new HashSet<>();
+        static List<String>[] BANNED;
+        static Set<Set<String>> idSet = new HashSet<>();
 
-		private void getBannedFromUser(String[] user_id, String[] banned_id) {
-			for (int i = 0; i < banned_id.length; i++) {
-				List<String> bannedId = new ArrayList<>();
-				String banned = banned_id[i].replace("*", ".");
+        private void getBannedFromUser(String[] user_id, String[] banned_id) {
+            for (int i = 0; i < banned_id.length; i++) {
+                List<String> bannedId = new ArrayList<>();
+                String banned = banned_id[i].replace("*", ".");
 
-				for (String id : user_id) {
-					if (id.matches(banned)) {
-						bannedId.add(id);
-					}
-				}
-				BANNED[i] = bannedId;
-			}
-		}
+                for (String id : user_id) {
+                    if (id.matches(banned)) {
+                        bannedId.add(id);
+                    }
+                }
+                BANNED[i] = bannedId;
+            }
+        }
 
-		private void recFunc(int depth, Set<String> ids) {
-			if (depth == BANNED.length) {
-				idSet.add(new HashSet<>(ids));
-				return;
-			}
+        private void recFunc(int depth, Set<String> ids) {
+            if (depth == BANNED.length) {
+                idSet.add(new HashSet<>(ids));
+                return;
+            }
 
-			for (int i = 0; i < BANNED[depth].size(); i++) {
-				if (ids.contains(BANNED[depth].get(i))) continue;
-				ids.add(BANNED[depth].get(i));
-				recFunc(depth + 1, ids);
-				ids.remove(BANNED[depth].get(i));
-			}
-		}
+            for (int i = 0; i < BANNED[depth].size(); i++) {
+                if (ids.contains(BANNED[depth].get(i))) {
+                    continue;
+                }
+                ids.add(BANNED[depth].get(i));
+                recFunc(depth + 1, ids);
+                ids.remove(BANNED[depth].get(i));
+            }
+        }
 
-		public int solution(String[] user_id, String[] banned_id) {
-			BANNED = new ArrayList[banned_id.length];
+        public int solution(String[] user_id, String[] banned_id) {
+            BANNED = new ArrayList[banned_id.length];
 
-			getBannedFromUser(user_id, banned_id);
+            getBannedFromUser(user_id, banned_id);
 
-			recFunc(0, new HashSet<>());
+            recFunc(0, new HashSet<>());
 
-			return idSet.size();
-		}
-	}
+            return idSet.size();
+        }
+    }
 
-	class Solution2 {
+    class Solution2 {
 
-		private void count(int index, Set<String> banned, String[][] bans, Set<Set<String>> banSet) {
-			if (index == bans.length) {
-				banSet.add(new HashSet<>(banned));
-				return;
-			}
+        private void count(int index, Set<String> banned, String[][] bans, Set<Set<String>> banSet) {
+            if (index == bans.length) {
+                banSet.add(new HashSet<>(banned));
+                return;
+            }
 
-			for (String id : bans[index]) {
-				if (banned.contains(id)) continue;
-				banned.add(id);
-				count(index + 1, banned, bans, banSet);
-				banned.remove(id);
-			}
-		}
+            for (String id : bans[index]) {
+                if (banned.contains(id)) {
+                    continue;
+                }
+                banned.add(id);
+                count(index + 1, banned, bans, banSet);
+                banned.remove(id);
+            }
+        }
 
-		public int solution(String[] user_id, String[] banned_id) {
+        public int solution(String[] user_id, String[] banned_id) {
 
-			String[][] bans = Arrays.stream(banned_id)
-					.map(banned -> banned.replace("*", "."))
-					.map(banned -> Arrays.stream(user_id)
-							.filter(id -> id.matches(banned))
-							.toArray(String[]::new))
-					.toArray(String[][]::new);
+            String[][] bans = Arrays.stream(banned_id)
+                    .map(banned -> banned.replace("*", "."))
+                    .map(banned -> Arrays.stream(user_id)
+                            .filter(id -> id.matches(banned))
+                            .toArray(String[]::new))
+                    .toArray(String[][]::new);
 
-
-		}
-	}
+            Set<Set<String>> banSet = new HashSet<>();
+            count(0, new HashSet<>(), bans, banSet);
+            return banSet.size();
+        }
+    }
 }
