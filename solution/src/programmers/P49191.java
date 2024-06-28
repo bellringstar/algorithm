@@ -118,4 +118,58 @@ public class P49191 {
 			return answer;
 		}
 	}
+	/*
+    순위가 정해지는 사람 = 내 위로 몇명인지 아래로 몇명인지 결정난 사람
+    승패를 방향으로 삼은 방향그래프.
+    정방향 탐색 + 역방향 탐색 + 1 = n 인 경우 승패 확정 가능.
+
+    1. 그래프를 구성한다. (역방향, 정방향)
+    2. dfs를 통해 방문한 노드의 개수를 찾는다.
+    3. 조건에 맞담녀 정답 +1
+    */
+	class Solution3 {
+		List<List<Integer>> forward = new ArrayList<>();
+		List<List<Integer>> backward = new ArrayList<>();
+		public int solution(int n, int[][] results) {
+			init(n);
+			buildGraph(results);
+			int answer = 0;
+
+			for (int i = 1; i <= n; i++) {
+				int a = dfs(i, forward, new boolean[n+1]) - 1;
+				int b = dfs(i, backward, new boolean[n+1]) - 1;
+				if (a + b + 1 == n) answer++;
+			}
+
+			return answer;
+		}
+
+		private int dfs(int v, List<List<Integer>> graph, boolean[] visited) {
+			int cnt = 1;
+
+			for (int u : graph.get(v)) {
+				if (visited[u]) continue;
+				visited[u] = true;
+				cnt += dfs(u, graph, visited);
+			}
+
+			return cnt;
+		}
+
+		private void buildGraph(int[][] results) {
+			for (int[] result : results) {
+				int from = result[0];
+				int to = result[1];
+				forward.get(from).add(to);
+				backward.get(to).add(from);
+			}
+		}
+
+		private void init(int n) {
+			for (int i = 0; i <= n; i++) {
+				forward.add(new ArrayList<>());
+				backward.add(new ArrayList<>());
+			}
+		}
+	}
 }
