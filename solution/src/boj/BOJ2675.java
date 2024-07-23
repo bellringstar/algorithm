@@ -5,42 +5,28 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BOJ8958 {
+public class BOJ2675 {
 
     static FastReader scan = new FastReader();
-    static int N;
-    static String[] arr;
-    static StringBuilder sb = new StringBuilder();
 
-    static void input() {
-        N = scan.nextInt();
-        arr = new String[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = scan.next();
-        }
-    }
-
+    static int T;
     static void logic() {
-        for (int i = 0; i < N; i++) {
-            int score = 0;
-            char[] result = arr[i].toCharArray();
-            int x = 0;
-            for (char c : result) {
-                if (c == 'O') {
-                    x++;
-                    score += x;
-                } else {
-                    x = 0;
-                }
+        int N = scan.nextInt();
+        String s = scan.next();
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            for (int i = 0; i < N; i++) {
+                sb.append(c);
             }
-            sb.append(score).append('\n');
         }
+        System.out.println(sb);
     }
 
     public static void main(String[] args) {
-        input();
-        logic();
-        System.out.println(sb);
+        T = scan.nextInt();
+        for (int i = 0; i < T; i++) {
+            logic();
+        }
     }
 
     static class FastReader {

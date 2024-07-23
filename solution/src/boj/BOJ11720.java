@@ -3,44 +3,21 @@ package boj;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class BOJ8958 {
+public class BOJ11720 {
 
     static FastReader scan = new FastReader();
+
     static int N;
-    static String[] arr;
-    static StringBuilder sb = new StringBuilder();
-
-    static void input() {
-        N = scan.nextInt();
-        arr = new String[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = scan.next();
-        }
-    }
-
-    static void logic() {
-        for (int i = 0; i < N; i++) {
-            int score = 0;
-            char[] result = arr[i].toCharArray();
-            int x = 0;
-            for (char c : result) {
-                if (c == 'O') {
-                    x++;
-                    score += x;
-                } else {
-                    x = 0;
-                }
-            }
-            sb.append(score).append('\n');
-        }
-    }
 
     public static void main(String[] args) {
-        input();
-        logic();
-        System.out.println(sb);
+        N = scan.nextInt();
+        int sum = Arrays.stream(scan.next().split(""))
+                .mapToInt(Integer::parseInt)
+                .sum();
+        System.out.println(sum);
     }
 
     static class FastReader {

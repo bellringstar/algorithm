@@ -3,44 +3,47 @@ package boj;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class BOJ8958 {
+public class BOJ1157 {
 
     static FastReader scan = new FastReader();
-    static int N;
-    static String[] arr;
-    static StringBuilder sb = new StringBuilder();
+
+    static String s;
 
     static void input() {
-        N = scan.nextInt();
-        arr = new String[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = scan.next();
-        }
+        s = scan.next();
     }
 
     static void logic() {
-        for (int i = 0; i < N; i++) {
-            int score = 0;
-            char[] result = arr[i].toCharArray();
-            int x = 0;
-            for (char c : result) {
-                if (c == 'O') {
-                    x++;
-                    score += x;
-                } else {
-                    x = 0;
-                }
+        s = s.toUpperCase();
+        Map<Character, Integer> map = new HashMap<>();
+        int maxCount = 0;
+        char answer = s.charAt(0);
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            if (map.get(c) > maxCount) {
+                maxCount = map.get(c);
+                answer = c;
             }
-            sb.append(score).append('\n');
+        }
+        final int max = maxCount;
+        long count = map.entrySet().stream()
+                .filter(e -> e.getValue() == max)
+                .count();
+        if (count > 1) {
+            System.out.println("?");
+        } else {
+            System.out.println(answer);
         }
     }
+
 
     public static void main(String[] args) {
         input();
         logic();
-        System.out.println(sb);
     }
 
     static class FastReader {
