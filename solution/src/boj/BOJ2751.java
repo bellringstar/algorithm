@@ -1,32 +1,33 @@
 package boj;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class BOJ2750 {
+public class BOJ2751 {
 
     static FastReader scan = new FastReader();
 
     static int N;
-    static int[] numbers;
-
-    static void input() {
-        N = scan.nextInt();
-        numbers = new int[N];
-        for (int i = 0; i < N; i++) {
-            numbers[i] = scan.nextInt();
-        }
-    }
+    static int[] nums;
 
     public static void main(String[] args) {
-        input();
-        Arrays.sort(numbers);
-        for (int num : numbers) {
-            System.out.println(num);
+        N = scan.nextInt();
+        nums = new int[N];
+        for (int i = 0; i < N; i++) {
+            nums[i] = scan.nextInt();
         }
+
+        Arrays.sort(nums);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            sb.append(nums[i]).append("\n");
+        }
+        System.out.println(sb);
     }
 
     static class FastReader {
@@ -35,6 +36,10 @@ public class BOJ2750 {
 
         public FastReader() {
             br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        public FastReader(String filename) throws FileNotFoundException {
+            br = new BufferedReader(new FileReader(filename));
         }
 
         String next() {
