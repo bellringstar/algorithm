@@ -4,28 +4,35 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class BOJ10816 {
 	static FastReader scan = new FastReader();
 	static int N, M;
-	static int[] A, B;
+	static Map<Integer, Integer> A = new HashMap<>();
 
 	static void input() {
 		N = scan.nextInt();
-		A = new int[N + 1];
 		for (int i = 1; i <= N; i++) {
-			A[i] = scan.nextInt();
+			int num = scan.nextInt();
+			A.put(num, A.getOrDefault(num, 0) + 1);
 		}
 		M = scan.nextInt();
-		Arrays.sort(A, 1, N + 1);
 	}
 
 	public static void main(String[] args) {
 		input();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 1; i <= M; i++) {
 			int target = scan.nextInt();
+			sb.append(A.getOrDefault(target, 0));
+			sb.append(" ");
 		}
+		System.out.println(sb);
 	}
 
 	static class FastReader {
