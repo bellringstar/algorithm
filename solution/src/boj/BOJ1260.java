@@ -7,79 +7,71 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class BOJ1260 {
 
 	static FastReader scan = new FastReader();
-	static StringBuilder sb = new StringBuilder();
 
 	static int N, M, V;
-	static ArrayList<Integer>[] graph;
-	static boolean[] visited;
+	static List<int[]> graph = new ArrayList<>();
 
 	static void input() {
 		N = scan.nextInt();
 		M = scan.nextInt();
 		V = scan.nextInt();
 
-		graph = new ArrayList[N + 1];
-		for (int i = 1; i <= N; i++) {
-			graph[i] = new ArrayList<>();
-		}
-		for (int i = 0; i < M; i++) {
-			int start = scan.nextInt(), to = scan.nextInt();
-			graph[start].add(to);
-			graph[to].add(start);
+		for (int i = 0; i <= N; i++) {
+			graph.add(new int[N+1]);
 		}
 
-		for (int i = 1; i <= N; i++) {
-			Collections.sort(graph[i]);
+		for (int i = 0; i < M; i++) {
+			int a = scan.nextInt();
+			int b = scan.nextInt();
+			graph.get(a)[b] = 1;
+			graph.get(b)[a] = 1;
 		}
 	}
 
-	static void dfs(int v) {
-		sb.append(v).append(' ');
+	static void dfs(int v, boolean[] visited) {
 		visited[v] = true;
-
-		for (int x : graph[v]) {
-			if (visited[x])
-				continue;
-			dfs(x);
+		System.out.print(v + " ");
+		for (int u = 1; u <= N; u++) {
+			if (graph.get(v)[u] == 1 && !visited[u]) {
+				dfs(u, visited);
+			}
 		}
 	}
 
 	static void bfs(int v) {
-
-		Deque<Integer> queue = new LinkedList<>();
+		Queue<Integer> queue = new LinkedList<>();
+		boolean[] visited = new boolean[N+1];
 		queue.add(v);
 		visited[v] = true;
 
 		while (!queue.isEmpty()) {
-			int x = queue.poll();
-			sb.append(x).append(' ');
-			for (int y : graph[x]) {
-				if (visited[y])
-					continue;
-				queue.add(y);
-				visited[y] = true;
+			int u = queue.poll();
+			System.out.print(u + " ");
+			for (int i = 1; i <= N; i++) {
+				if (graph.get(u)[i] == 1 && !visited[i]) {
+					queue.add(i);
+					visited[i] = true;
+				}
 			}
 		}
 	}
 
 	public static void main(String[] args) {
 		input();
-		visited = new boolean[N + 1];
-		dfs(V);
-		sb.append('\n');
-		for (int i = 1; i <= N; i++) {
-			visited[i] = false;
-		}
+		dfs(V, new boolean[N + 1]);
+		System.out.println();
 		bfs(V);
-		System.out.println(sb);
 	}
 
 	static class FastReader {
+
 		BufferedReader br;
 		StringTokenizer st;
 
