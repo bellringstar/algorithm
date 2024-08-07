@@ -8,25 +8,25 @@ import java.util.StringTokenizer;
 public class BOJ9095 {
 
 	static FastReader scan = new FastReader();
-	static int N;
-	static int[] dp;
+	static int T;
+	static int[] mem;
 
-	static void pro() {
-		dp = new int[12];
-		dp[1] = 1;
-		dp[2] = 2;
-		dp[3] = 4;
-		for (int i = 4; i < 11; i++) {
-			dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+	static void dp() {
+		mem = new int[12];
+		mem[1] = 1; // 1
+		mem[2] = 2; // 1+1, 2
+		mem[3] = 4; // 1+1+1, 1+2, 2+1, 3
+		for (int i = 4; i < 12; i++) {
+			mem[i] = mem[i - 1] + mem[i - 2] + mem[i - 3];
 		}
 	}
 
 	public static void main(String[] args) {
-		pro();
-		int T = scan.nextInt();
+		T = scan.nextInt();
+		dp();
 		for (int i = 0; i < T; i++) {
-			N = scan.nextInt();
-			System.out.println(dp[N]);
+			int num = scan.nextInt();
+			System.out.println(mem[num]);
 		}
 	}
 
